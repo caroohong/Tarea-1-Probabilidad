@@ -1,0 +1,15 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from matplotlib import pyplot as plt
+data = pd.read_csv('StudentsPerformance.csv', sep=',')#funciona si el csv esta en la misma carpeta q el python
+#renombrar columnas: codigo de Ching-Chun Yeh de Students Performance in Exams
+data.rename(columns={"race/ethnicity":"ethnicity","parental level of education":"parent_education",
+                     "math score":"math","reading score":"reading","writing score":"writing",
+                     "test preparation course":"preparation"},inplace=True)
+data['total']= data['math']+data['reading']+data['writing']#crear nueva columna que indica la suma de las 3 notas
+"""
+PREGUNTA 6: parental level of education
+"""
+p = sns.countplot(x='parent_education', data = data, hue='gender', palette='Spectral')
+plt.setp(p.get_xticklabels(), rotation=90) 
